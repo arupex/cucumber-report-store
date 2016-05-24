@@ -38,11 +38,13 @@ module.exports = (function CucumberReportStore(){
         featureHtml = featureHtml + '\n\t\t<h3>' + feature.name + '</h3>\n';
         featureHtml = featureHtml + '\n\t\t<h4>' + feature.description + '</h4>\n';
 
-        feature.elements.forEach(function scenarioIterate(scenario){
+        if(feature && feature.elements){
+            feature.elements.forEach(function scenarioIterate(scenario){
 
-            featureHtml = featureHtml + handleScenario(scenario);
+                featureHtml = featureHtml + handleScenario(scenario);
 
-        });
+            });
+        }
 
         return '\n\t' + accordian(featureHtml, feature.name, 'grey') + '\n';
     }
@@ -52,18 +54,21 @@ module.exports = (function CucumberReportStore(){
 
         scenarioHtml = scenarioHtml + '\n\t\t<div>' +scenario.name + '</div>\n';
 
-        scenario.tags.forEach(function iterateOverTags(tag){
-            scenarioHtml = scenarioHtml + '\n\t\t<h5>' + tag.name + '</h5>\n';
-        });
+        if(scenario && scenario.tags){
+            scenario.tags.forEach(function iterateOverTags(tag){
+                scenarioHtml = scenarioHtml + '\n\t\t<h5>' + tag.name + '</h5>\n';
+            });
+        }
 
         var healthy = true;
-        scenario.steps.forEach(function iterateSteps(step){
+        if(scenario && scenario.steps){
+            scenario.steps.forEach(function iterateSteps(step){
 
-            scenarioHtml = scenarioHtml + handleStep(step);
+                scenarioHtml = scenarioHtml + handleStep(step);
 
-            healthy = healthy && stepPassed(step);
-        });
-
+                healthy = healthy && stepPassed(step);
+            });
+        }
         return accordian(scenarioHtml, scenario.name, healthy?'green':'red');
     }
 
@@ -91,12 +96,13 @@ module.exports = (function CucumberReportStore(){
     function getHTMLReport(){
 
         var html = '';
+        if(storage){
+            storage.forEach(function iterateOnFeature(feature){
 
-        storage.forEach(function iterateOnFeature(feature){
+                html = html + handleFeature(feature)
 
-            html = html + handleFeature(feature)
-
-        });
+            });
+        }
 
         return `
             <html>
