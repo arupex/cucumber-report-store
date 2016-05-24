@@ -115,9 +115,13 @@ module.exports = (function CucumberReportStore(){
             </html>`;
     }
 
+    function clear(){
+        storage = [];
+    }
 
     return {
         addJSONReport : addJSONReport,
-        getHTMLReport : getHTMLReport
+        getHTMLReport : getHTMLReport,
+        clear : clear
     };
 })();
