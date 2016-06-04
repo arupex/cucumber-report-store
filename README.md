@@ -18,7 +18,7 @@ Why not use the html reporter?
 #How To Use:
 
 
-    var StorageFactory = require('./index');
+    var StorageFactory = require('cucumber-report-store');
        var report = new StorageFactory();
        report.addJSONReport(require('./testFeatures.js'));
         report.initConfig({
