@@ -2,18 +2,23 @@
  * Created by daniel.irwin on 5/24/16.
  */
 
-var StorageFactory = require('./index');
-var report = new StorageFactory();
+describe('cucumber-report-store', function(){
+    it('doesnt explode', function() {
 
-report.addJSONReport(require('./testFeatures.js'));
+        var StorageFactory = require('./index');
+        var report = new StorageFactory();
 
-report.initConfig({
-    link : 'http://test-runner-server.test.com/run?testname=',
-    linkLabel : 'Run: '
+        report.addJSONReport(require('./testFeatures.js'));
+
+        report.initConfig({
+            link: 'http://test-runner-server.test.com/run?testname=',
+            linkLabel: 'Run: '
+        });
+
+        var fs = require('fs');
+
+        var data = report.getHTMLReport();
+        //fs.writeFileSync('test.html', data);
+        console.log('', data);
+    });
 });
-
-var fs = require('fs');
-
-var data = report.getHTMLReport();
-fs.writeFileSync('test.html', data);
-console.log('', data);
