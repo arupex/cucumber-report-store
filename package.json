@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "./node_modules/mocha/bin/mocha test.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dirwin517/cucumber-report-store/issues"
   },
-  "homepage": "https://github.com/dirwin517/cucumber-report-store#readme"
+  "homepage": "https://github.com/dirwin517/cucumber-report-store#readme",
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
 }
